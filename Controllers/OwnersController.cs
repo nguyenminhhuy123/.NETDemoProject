@@ -1,7 +1,6 @@
 using Asp.net_core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Asp.net_core.Models;
-
+using Asp.net_core.DTO;
 
 namespace Asp.net_core.Controllers
 {
@@ -21,9 +20,32 @@ namespace Asp.net_core.Controllers
             return Ok(owners);
         }
         [HttpPost]
-        public ActionResult PostOwners(int name)
+        public ActionResult PostOwner(int name)
         {
-             _repository.PostOwners(name);
+            if(!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }
+             _repository.PostOwner(name);
+             return Ok();
+        }
+
+        [HttpPut]
+        public ActionResult PutOwner([FromBody]OwnerDto ownerDto )
+        {
+            if(!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }
+             _repository.PutOwner(ownerDto);
+             return Ok();
+        }
+
+        [HttpDelete]
+        public ActionResult DeleteOwner(int id)
+        {
+            if(!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }
+             _repository.DeleteOwner(id);
              return Ok();
         }
     }
