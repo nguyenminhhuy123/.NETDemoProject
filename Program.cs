@@ -9,7 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddScoped<IRepository,Repository>();
+builder.Services.AddScoped<IOwnersRepository,OwnersRepository>();
+builder.Services.AddScoped<ICarsRepository,CarsRepository>();
+builder.Services.AddScoped<IVendorsRepository,VendorsRepository>();
+builder.Services.AddScoped<IReceiptsRepository, ReceiptsRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

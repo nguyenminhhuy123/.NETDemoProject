@@ -1,6 +1,8 @@
 using Asp.net_core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Asp.net_core.DTO;
+using AutoMapper;
+using Asp.net_core.Models;
 
 namespace Asp.net_core.Controllers
 {
@@ -8,24 +10,32 @@ namespace Asp.net_core.Controllers
     [Route("api/[controller]")]
     public class OwnersController : ControllerBase
     {
-        private readonly IRepository _repository;
-        public OwnersController( IRepository repository)
+        private readonly IMapper _mapper;
+        private readonly IOwnersRepository _ownerRepository;
+
+        public OwnersController(IOwnersRepository ownerRepository, IMapper mapper)
         {
-            _repository = repository;
+            _ownerRepository = ownerRepository;
+            _mapper = mapper;
         }
+
         [HttpGet]
         public ActionResult GetOwners()
         {
-            var owners = _repository.GetOwners();
+            var owners = _ownerRepository.GetOwners();
             return Ok(owners);
         }
+        
         [HttpPost]
-        public ActionResult PostOwner(int name)
+        public ActionResult PostOwner(string name)
         {
             if(!ModelState.IsValid){
                 return BadRequest(ModelState);
             }
-             _repository.PostOwner(name);
+            var owner = new Owner(){
+                Name = name,
+            };
+             _ownerRepository.PostOwner(owner);
              return Ok();
         }
 
@@ -35,17 +45,24 @@ namespace Asp.net_core.Controllers
             if(!ModelState.IsValid){
                 return BadRequest(ModelState);
             }
-             _repository.PutOwner(ownerDto);
+             _ownerRepository.PutOwner(_mapper.Map<Owner>(ownerDto));
              return Ok();
         }
 
         [HttpDelete]
         public ActionResult DeleteOwner(int id)
         {
+            if(!_ownerRepository.IsExist(id)){
+                return NotFound();
+            }
+            var owner = _ownerRepository.GetOwnerById(id);
             if(!ModelState.IsValid){
                 return BadRequest(ModelState);
             }
-             _repository.DeleteOwner(id);
+            if(!_ownerRepository.DeleteOwner(owner)){
+                ModelState.AddModelError("","Something went wrong deleting owner");
+                return StatusCode(500,ModelState);
+            };
              return Ok();
         }
     }

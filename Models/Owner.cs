@@ -1,15 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Asp.net_core.Models
 {
     public class Owner
     {
         public int Id {get; set;}
-        public int Name {get; set;}
 
-        public virtual ICollection<Car> Cars { get; set; }
+        [StringLength(30)]
+        public string? Name {get; set;}
+
+        public virtual ICollection<Receipt>? Receipts { get; set; }
     }
 }

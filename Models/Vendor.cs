@@ -2,15 +2,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Asp.net_core.Models
 {
-    public class Car
+    public class Vendor
     {
         public int Id {get; set;}
 
         [StringLength(30)]
         public string? Name {get; set;}
 
-        public double Price {get; set;}
+        public int Bithdate {get; set;}
 
-        public virtual Receipt? Receipt { get; set; }
+        public virtual ICollection<Receipt>? Receipts { get; set; }
+
     }
 }
