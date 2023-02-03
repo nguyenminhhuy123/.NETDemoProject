@@ -1,7 +1,7 @@
-using System.Data.Entity;
 using Asp.net_core.Interfaces;
 using Asp.net_core.Models;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace Asp.net_core.Repository
 {
@@ -17,8 +17,10 @@ namespace Asp.net_core.Repository
 
         public ICollection<Car> GetCars()
         {
-            var test = _context.Cars.Include(b => b.Receipt).OrderBy(p => p.Name).ToList();
-            return test;
+            return _context.Cars
+            .Include(b => b.receipts).ThenInclude(n => n.Owner)
+            .Include(g => g.receipts).ThenInclude(d => d.Vendor)
+            .OrderBy(p => p.Name).ToList();
         }
 
         public bool SaveChanges()

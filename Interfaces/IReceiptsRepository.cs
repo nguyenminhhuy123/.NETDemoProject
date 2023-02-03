@@ -6,7 +6,7 @@ namespace Asp.net_core.Interfaces
     {
         Task<ICollection<Receipt>> GetReceipts(); 
 
-        Task<bool> PostReceipt(Receipt receipt);
+        bool PostReceipt(Receipt receipt);
 
         bool PutReceipt(Receipt receipt);
 

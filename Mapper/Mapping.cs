@@ -1,8 +1,8 @@
 using Asp.net_core.DTO;
-using Asp.net_core.DTO.Car;
-using Asp.net_core.DTO.Owner;
-using Asp.net_core.DTO.Receipts;
-using Asp.net_core.DTO.Vendor;
+using Asp.net_core.DTO.CarDto;
+using Asp.net_core.DTO.OwnerDto;
+using Asp.net_core.DTO.ReceiptsDto;
+using Asp.net_core.DTO.VendorDto;
 using Asp.net_core.Models;
 using AutoMapper;
 
@@ -12,7 +12,8 @@ namespace Asp.net_core.Mapper
     {
         public Mapping()
         {
-            CreateMap<OwnerDto, Owner>();
+            CreateMap<OwnerDTO, Owner>();
+            CreateMap<Owner, ResponeOwnerDto>();
             CreateMap<Owner, ResponeOwnerDto>();
 
             CreateMap<UpdateCarDto, Car>();
@@ -23,6 +24,7 @@ namespace Asp.net_core.Mapper
 
             CreateMap<PostReceiptDto, Receipt>();
             CreateMap<UpdateReceiptDto, Receipt>();
+            CreateMap<Receipt, ResponeReceiptDto>();
         }
     }
 }

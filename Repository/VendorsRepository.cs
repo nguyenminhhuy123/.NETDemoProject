@@ -27,7 +27,10 @@ namespace Asp.net_core.Repository
 
         public async Task<ICollection<Vendor>> GetVendors()
         {
-            return await _context.Vendors.Include(p => p.Receipts).ToListAsync();   
+            return await _context.Vendors
+            .Include(p => p.Receipts).ThenInclude(i => i.Car)
+            .Include(o => o.Receipts).ThenInclude(y => y.Owner)
+            .ToListAsync();   
         }
 
         public bool IsExist(int id)

@@ -1,4 +1,4 @@
-using Asp.net_core.DTO.Car;
+using Asp.net_core.DTO.CarDto;
 using Asp.net_core.Interfaces;
 using Asp.net_core.Models;
 using AutoMapper;

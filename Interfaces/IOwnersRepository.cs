@@ -1,11 +1,11 @@
-using Asp.net_core.DTO.Owner;
+using Asp.net_core.DTO.OwnerDto;
 using Asp.net_core.Models;
 
 namespace Asp.net_core.Interfaces
 {
     public interface IOwnersRepository
     {
-        ICollection<ResponeOwnerDto> GetOwners(); 
+        ICollection<Owner> GetOwners(); 
 
         bool PostOwner(Owner owner);
 

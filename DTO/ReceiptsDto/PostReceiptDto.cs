@@ -1,4 +1,4 @@
-namespace Asp.net_core.DTO.Receipts
+namespace Asp.net_core.DTO.ReceiptsDto
 {
     public class PostReceiptDto
     {

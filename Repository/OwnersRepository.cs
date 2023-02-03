@@ -1,8 +1,8 @@
 using Asp.net_core.Models;
 using Asp.net_core.Interfaces;
 using AutoMapper;
-using Asp.net_core.DTO.Owner;
-using System.Data.Entity;
+using Asp.net_core.DTO.OwnerDto;
+using Microsoft.EntityFrameworkCore;
 
 namespace Asp.net_core.Repository
 {
@@ -16,11 +16,13 @@ namespace Asp.net_core.Repository
             _context = context;
         }
 
-        public ICollection<ResponeOwnerDto> GetOwners()
+        public ICollection<Owner> GetOwners()
         {
-            var Owners = _context.Owners.Include(b => b.Receipts).OrderBy(p => p.Name).ToList();
-            var responeOwnerDtos = _mapper.Map<ICollection<ResponeOwnerDto>>(Owners);
-            return responeOwnerDtos;
+            var Owners = _context.Owners
+            .Include(b => b.Receipts).ThenInclude(i => i.Vendor)
+            .Include(b => b.Receipts).ThenInclude(i => i.Car)
+            .ToList();
+            return Owners;
         }
 
         public bool PostOwner(Owner owner)

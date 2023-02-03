@@ -28,10 +28,6 @@ namespace Asp.net_core.Repository
 
         public async Task<ICollection<Receipt>> GetReceipts()
         {
-            var test = await _context.Receipts.Include(p => p.Car)
-            .Include(b => b.Owner)
-            .Include(n => n.Vendor)
-            .ToListAsync();
             return await _context.Receipts.Include(p => p.Car)
             .Include(b => b.Owner)
             .Include(n => n.Vendor)
@@ -43,16 +39,16 @@ namespace Asp.net_core.Repository
             return _context.Receipts.Any(p => p.Id == id);
         }
 
-        public async Task<bool> PostReceipt(Receipt receipt)
+        public bool PostReceipt(Receipt receipt)
         {
-            await _context.Receipts.AddAsync(receipt);
+            _context.Receipts.Add(receipt);
             return SaveChanges();
         }
 
         public bool PutReceipt(Receipt receipt)
         {
             _context.Receipts.Update(receipt);
-            return SaveChanges(); 
+            return SaveChanges();
         }
 
         public bool SaveChanges()

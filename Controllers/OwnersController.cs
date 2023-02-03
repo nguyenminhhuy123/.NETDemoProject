@@ -1,8 +1,9 @@
 using Asp.net_core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Asp.net_core.DTO;
 using AutoMapper;
 using Asp.net_core.Models;
+using Asp.net_core.DTO.OwnerDto;
+using Asp.net_core.DTO.ReceiptsDto;
 
 namespace Asp.net_core.Controllers
 {
@@ -40,7 +41,7 @@ namespace Asp.net_core.Controllers
         }
 
         [HttpPut]
-        public ActionResult PutOwner([FromBody]OwnerDto ownerDto )
+        public ActionResult PutOwner([FromBody]OwnerDTO ownerDto )
         {
             if(!ModelState.IsValid){
                 return BadRequest(ModelState);

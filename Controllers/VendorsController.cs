@@ -1,4 +1,4 @@
-using Asp.net_core.DTO.Vendor;
+using Asp.net_core.DTO.VendorDto;
 using Asp.net_core.Interfaces;
 using Asp.net_core.Models;
 using AutoMapper;

@@ -17,8 +17,18 @@ namespace Asp.net_core.Models
         {
             modelBuilder.Entity<Receipt>()
             .HasOne(a => a.Car)
-            .WithOne(b => b.Receipt)
+            .WithOne(b => b.receipts)
             .HasForeignKey<Receipt>(c => c.IdCar);
+
+            modelBuilder.Entity<Receipt>()
+            .HasOne(a => a.Owner)
+            .WithMany(b => b.Receipts)
+            .HasForeignKey(c => c.IdOwner);
+
+            modelBuilder.Entity<Receipt>()
+            .HasOne(a => a.Vendor)
+            .WithMany(b => b.Receipts)
+            .HasForeignKey(c => c.IdVendor);
             modelBuilder.Entity<Owner>().ToTable("Owner");
             modelBuilder.Entity<Vendor>().ToTable("Vendor");
             modelBuilder.Entity<Car>().ToTable("Car");

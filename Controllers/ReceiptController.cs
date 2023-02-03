@@ -1,4 +1,4 @@
-using Asp.net_core.DTO.Receipts;
+using Asp.net_core.DTO.ReceiptsDto;
 using Asp.net_core.Interfaces;
 using Asp.net_core.Models;
 using AutoMapper;
@@ -35,11 +35,12 @@ namespace Asp.net_core.Controllers
         public async Task<ActionResult> GetReceipt()
         {
             var receipt = await _receiptsRepository.GetReceipts();
+            
             return Ok(receipt);
         }
 
         [HttpPost]
-        public async Task<ActionResult> PostReceipt([FromBody]PostReceiptDto postReceiptDto)
+        public ActionResult PostReceipt([FromBody]PostReceiptDto postReceiptDto)
         {
             if(!ModelState.IsValid){
                 return BadRequest();
@@ -54,7 +55,13 @@ namespace Asp.net_core.Controllers
                 return NotFound();
             }
             var receipt = _mapper.Map<Receipt>(postReceiptDto);
-            if(! await _receiptsRepository.PostReceipt(receipt)){
+            var owner = _ownersRepository.GetOwnerById(postReceiptDto.IdOwner);
+            var car = _carsRepository.GetCarById(postReceiptDto.IdCar);
+            var vendor = _vendorsRepository.GetVendorById(postReceiptDto.IdVendor);
+            receipt.Car = car;
+            receipt.Owner = owner;
+            receipt.Vendor = vendor;
+            if(!_receiptsRepository.PostReceipt(receipt)){
                 ModelState.AddModelError("","Something went wrong posting receipt");
                 return StatusCode(500,ModelState);
             }
@@ -96,7 +103,7 @@ namespace Asp.net_core.Controllers
                 return NotFound();
             }
             var receipt = _receiptsRepository.GetReceiptById(id);     
-            if(_receiptsRepository.DeleteReceipt(receipt))
+            if(!_receiptsRepository.DeleteReceipt(receipt))
             {
                 ModelState.AddModelError("","Something went wrong deleting receipt");
                 return StatusCode(500, ModelState);

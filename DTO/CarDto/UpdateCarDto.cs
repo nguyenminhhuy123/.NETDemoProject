@@ -1,4 +1,4 @@
-namespace Asp.net_core.DTO.Car
+namespace Asp.net_core.DTO.CarDto
 {
     public class UpdateCarDto
     {

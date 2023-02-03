@@ -13,6 +13,10 @@ namespace Asp.net_core.Models
 
         public int IdCar {get; set;}
 
+        public int IdVendor {get; set;}
+
+        public int IdOwner {get; set;}
+
         public virtual Vendor Vendor {get; set;}
 
         public virtual Owner Owner {get; set;}

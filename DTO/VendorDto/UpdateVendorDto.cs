@@ -1,4 +1,4 @@
-namespace Asp.net_core.DTO.Vendor
+namespace Asp.net_core.DTO.VendorDto
 {
     public class UpdateVendorDto
     {

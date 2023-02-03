@@ -11,6 +11,6 @@ namespace Asp.net_core.Models
 
         public double Price {get; set;}
 
-        public virtual Receipt? Receipt { get; set; }
+        public virtual Receipt? receipts { get; set; }
     }
 }
