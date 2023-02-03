@@ -19,14 +19,30 @@ namespace Asp.net_core.Controllers
             _mapper = mapper;
         }
 
+        /**
+        * Get all vendor
+        *
+        * @param a First number
+        * @return All vendor
+        */
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(Vendor))]
+        [ProducesResponseType(400)]
         public async Task<ActionResult> GetVendor()
         {
             var vendors = await _vendorRepository.GetVendors();
             return Ok(vendors);
         }
 
+        /**
+        * Add a receipt
+        *
+        * @param postVendorDto (vendor information to add)
+        * @return Status code
+        */
         [HttpPost]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
         public async Task<ActionResult> PostVendor([FromBody]PostVendorDto postVendorDto)
         {
             if(!ModelState.IsValid){
@@ -40,7 +56,15 @@ namespace Asp.net_core.Controllers
             return Ok();
         }
 
+        /**
+        * Update vendor by id
+        *
+        * @param updateVendorDto (vendor information to update)
+        * @return Status code
+        */
         [HttpPut]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
         public ActionResult PutVendor([FromBody]UpdateVendorDto updateVendorDto)
         {
             if(!ModelState.IsValid){
@@ -58,7 +82,15 @@ namespace Asp.net_core.Controllers
             return Ok();
         }
 
+        /**
+        * Delete vendor by id
+        *
+        * @param id (id to delete)
+        * @return Status code
+        */
         [HttpDelete]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
         public ActionResult DeleteVendor(int id)
         {
             if(!ModelState.IsValid){

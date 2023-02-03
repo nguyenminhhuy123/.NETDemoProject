@@ -31,7 +31,14 @@ namespace Asp.net_core.Controllers
             _mapper = mapper;
         }
 
+        /**
+        * Get all ceceipt
+        *
+        * @return All onwers
+        */
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(Receipt))]
+        [ProducesResponseType(400)]
         public async Task<ActionResult> GetReceipt()
         {
             var receipt = await _receiptsRepository.GetReceipts();
@@ -39,7 +46,15 @@ namespace Asp.net_core.Controllers
             return Ok(receipt);
         }
 
+        /**
+        * Add a receipt
+        *
+        * @param postReceiptDto (include car id, owner id, vendor id)
+        * @return Status code
+        */
         [HttpPost]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
         public ActionResult PostReceipt([FromBody]PostReceiptDto postReceiptDto)
         {
             if(!ModelState.IsValid){
@@ -68,7 +83,15 @@ namespace Asp.net_core.Controllers
             return Ok();
         }
 
+        /**
+        * Update a ceceipt by id.
+        *
+        * @param updateReceiptDto (receipt information to update)
+        * @return Status code
+        */
         [HttpPut]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
         public ActionResult PutReceipt([FromBody]UpdateReceiptDto updateReceiptDto)
         {
             if(!ModelState.IsValid){
@@ -91,7 +114,15 @@ namespace Asp.net_core.Controllers
             return Ok();
         }
 
+        /**
+        * Delete a receipt by id
+        *
+        * @param id (id to delete)
+        * @return Status code
+        */
         [HttpDelete]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
         public ActionResult DeleteReceipt(int id)
         {
             if(!ModelState.IsValid)

@@ -19,14 +19,29 @@ namespace Asp.net_core.Controllers
             _mapper = mapper;
         }
 
+        /**
+        * Get all cars.
+        *
+        * @return all cars
+        */
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(Car))]
+        [ProducesResponseType(400)]
         public ActionResult GetCars()
         {
             var cars = _carRepository.GetCars();
             return Ok(cars);
         }
 
+        /**
+        * Add a car
+        *
+        * @param postCarDto (car information)
+        * @return Status code
+        */
         [HttpPost]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(400)]
         public ActionResult PostCar([FromBody]PostCarDto postCarDto)
         {
             if(!ModelState.IsValid){
@@ -37,7 +52,15 @@ namespace Asp.net_core.Controllers
             return Ok();
         }
 
+        /**
+        * Update a car by id.
+        *
+        * @param updateCarDto (car information to update)
+        * @return Status code
+        */
         [HttpPut]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
         public ActionResult PutCar([FromBody]UpdateCarDto updateCarDto)
         {
             if(!ModelState.IsValid){
@@ -48,7 +71,15 @@ namespace Asp.net_core.Controllers
             return Ok();
         }
 
+        /**
+        * Delete a car by id
+        *
+        * @param id (id to delete)
+        * @return Status code
+        */
         [HttpDelete]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
         public ActionResult DeleteCar(int id)
         {
             if(!_carRepository.IsExist(id)){
