@@ -1,8 +1,9 @@
-namespace Asp.net_core.DTO.OwnerDto
+namespace Asp.net_core.DTO.UserDto
 {
-    public class OwnerDTO
+    public class UserDTO
     {
         public int Id {get; set;}
+        
         public string? Name {get; set;}
     }
 }

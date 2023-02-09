@@ -1,18 +1,21 @@
 using Asp.net_core.DTO.ReceiptsDto;
 using Asp.net_core.Interfaces;
 using Asp.net_core.Models;
+using Asp.net_core.Static;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Asp.net_core.Controllers
 {
+    [Authorize(Roles = UserRoles.AdminAndUser)]
     [ApiController]
     [Route("api/[controller]")]
     public class ReceiptController : ControllerBase
     {
         private readonly IMapper _mapper;
         private readonly IReceiptsRepository _receiptsRepository;
-        private readonly IOwnersRepository _ownersRepository;
+        private readonly IUsersRepository _usersRepository;
         private readonly ICarsRepository _carsRepository;
         private readonly IVendorsRepository _vendorsRepository;
 
@@ -20,12 +23,12 @@ namespace Asp.net_core.Controllers
         (
             IReceiptsRepository receiptsRepository,
             IMapper mapper,
-            IOwnersRepository ownersRepository,
+            IUsersRepository usersRepository,
             ICarsRepository carsRepository,
             IVendorsRepository vendorsRepository)
         {
             _receiptsRepository = receiptsRepository;
-            _ownersRepository = ownersRepository;
+            _usersRepository = usersRepository;
             _carsRepository = carsRepository;
             _vendorsRepository = vendorsRepository;
             _mapper = mapper;
@@ -42,14 +45,14 @@ namespace Asp.net_core.Controllers
         public async Task<ActionResult> GetReceipt()
         {
             var receipt = await _receiptsRepository.GetReceipts();
-            
-            return Ok(receipt);
+            var responeReceiptDto = _mapper.Map<List<ResponeReceiptDto>>(receipt);
+            return Ok(responeReceiptDto);
         }
 
         /**
         * Add a receipt
         *
-        * @param postReceiptDto (include car id, owner id, vendor id)
+        * @param postReceiptDto (include car id, User id, vendor id)
         * @return Status code
         */
         [HttpPost]
@@ -60,21 +63,21 @@ namespace Asp.net_core.Controllers
             if(!ModelState.IsValid){
                 return BadRequest();
             }
-            int idOwner = postReceiptDto.IdOwner;
+            int idUser = postReceiptDto.IdUser;
             int idCar = postReceiptDto.IdCar;
             int idVendor = postReceiptDto.IdVendor;
-            if(!_ownersRepository.IsExist(idOwner)|| 
+            if(!_usersRepository.IsExist(idUser)|| 
             !_carsRepository.IsExist(idCar) ||
             !_vendorsRepository.IsExist(idVendor))
             {
                 return NotFound();
             }
             var receipt = _mapper.Map<Receipt>(postReceiptDto);
-            var owner = _ownersRepository.GetOwnerById(postReceiptDto.IdOwner);
+            var User = _usersRepository.GetUserById(postReceiptDto.IdUser);
             var car = _carsRepository.GetCarById(postReceiptDto.IdCar);
             var vendor = _vendorsRepository.GetVendorById(postReceiptDto.IdVendor);
             receipt.Car = car;
-            receipt.Owner = owner;
+            receipt.User = User;
             receipt.Vendor = vendor;
             if(!_receiptsRepository.PostReceipt(receipt)){
                 ModelState.AddModelError("","Something went wrong posting receipt");
@@ -97,10 +100,10 @@ namespace Asp.net_core.Controllers
             if(!ModelState.IsValid){
                 return BadRequest();
             }
-            int idOwner = updateReceiptDto.IdOwner;
+            int idUser = updateReceiptDto.IdUser;
             int idCar = updateReceiptDto.IdCar;
             int idVendor = updateReceiptDto.IdVendor;
-            if(!_ownersRepository.IsExist(idOwner)|| 
+            if(!_usersRepository.IsExist(idUser)|| 
             !_carsRepository.IsExist(idCar) ||
             !_vendorsRepository.IsExist(idVendor))
             {

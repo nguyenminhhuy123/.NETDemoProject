@@ -6,7 +6,7 @@ namespace Asp.net_core.Models
         public Receipt()
         {
             Vendor = new Vendor();
-            Owner = new Owner();
+            User = new User();
             Car = new Car();
         }
         public int Id {get; set;}
@@ -15,11 +15,11 @@ namespace Asp.net_core.Models
 
         public int IdVendor {get; set;}
 
-        public int IdOwner {get; set;}
+        public int IdUser {get; set;}
 
         public virtual Vendor Vendor {get; set;}
 
-        public virtual Owner Owner {get; set;}
+        public virtual User User {get; set;}
 
         public virtual Car Car {get; set;}
         

@@ -2,73 +2,77 @@ using Asp.net_core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using Asp.net_core.Models;
-using Asp.net_core.DTO.OwnerDto;
+using Asp.net_core.DTO.UserDto;
+using Microsoft.AspNetCore.Authorization;
+using Asp.net_core.Static;
 
 namespace Asp.net_core.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     [ApiController]
     [Route("api/[controller]")]
-    public class OwnersController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private readonly IOwnersRepository _ownerRepository;
+        private readonly IUsersRepository _userRepository;
 
-        public OwnersController(IOwnersRepository ownerRepository, IMapper mapper)
+        public UsersController(IUsersRepository userRepository, IMapper mapper)
         {
-            _ownerRepository = ownerRepository;
+            _userRepository = userRepository;
             _mapper = mapper;
         }
 
         /**
-        * Get all owners
+        * Get all Users
         *
         * @return All onwers
         */
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(Owner))]
+        [ProducesResponseType(200, Type = typeof(ResponeUserDto))]
         [ProducesResponseType(400)]
-        public ActionResult GetOwners()
+        public ActionResult GetUsers()
         {
-            var owners = _ownerRepository.GetOwners();
-            return Ok(owners);
+            var users = _userRepository.GetUsers();
+            var responeUserDto = _mapper.Map<IList<ResponeUserDto>>(users);
+            return Ok(responeUserDto);
         }
         
         /**
-        * Add a owner
+        * Add a User
         *
-        * @param name (name of owner)
+        * @param name (name of User)
         * @return Status code
         */
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
-        public ActionResult PostOwner(string name)
+        public ActionResult PostUser(RegisterUserDto registerUserDto)
         {
             if(!ModelState.IsValid){
                 return BadRequest(ModelState);
             }
-            var owner = new Owner(){
-                Name = name,
-            };
-             _ownerRepository.PostOwner(owner);
-             return Ok();
+             _userRepository.PostUser
+            (
+                _mapper.Map<User>(registerUserDto)
+            );
+            return Ok();
         }
 
         /**
-        * Update a owner by id.
+        * Update a User by id.
         *
-        * @param ownerDto (owner information to update)
+        * @param UserDto (User information to update)
         * @return Status code
         */
         [HttpPut]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public ActionResult PutOwner([FromBody]OwnerDTO ownerDto )
+        public ActionResult PutUser([FromBody]UserDTO userDto )
         {
             if(!ModelState.IsValid){
                 return BadRequest(ModelState);
             }
-             _ownerRepository.PutOwner(_mapper.Map<Owner>(ownerDto));
+             _userRepository.PutUser(_mapper.Map<User>(userDto));
              return Ok();
         }
 
@@ -81,17 +85,17 @@ namespace Asp.net_core.Controllers
         [HttpDelete]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public ActionResult DeleteOwner(int id)
+        public ActionResult DeleteUser(int id)
         {
-            if(!_ownerRepository.IsExist(id)){
+            if(!_userRepository.IsExist(id)){
                 return NotFound();
             }
-            var owner = _ownerRepository.GetOwnerById(id);
+            var User = _userRepository.GetUserById(id);
             if(!ModelState.IsValid){
                 return BadRequest(ModelState);
             }
-            if(!_ownerRepository.DeleteOwner(owner)){
-                ModelState.AddModelError("","Something went wrong deleting owner");
+            if(!_userRepository.DeleteUser(User)){
+                ModelState.AddModelError("","Something went wrong deleting User");
                 return StatusCode(500,ModelState);
             };
              return Ok();

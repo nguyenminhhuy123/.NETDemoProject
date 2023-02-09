@@ -9,7 +9,7 @@ namespace Asp.net_core.Models
         }
 
         public DbSet<Car> Cars { get; set; } = null!;
-        public DbSet<Owner> Owners { get; set; } = null!;
+        public DbSet<User> Users { get; set; } = null!;
         public DbSet<Vendor> Vendors { get; set; } = null!;
         public DbSet<Receipt> Receipts { get; set; } = null!;
 
@@ -17,19 +17,19 @@ namespace Asp.net_core.Models
         {
             modelBuilder.Entity<Receipt>()
             .HasOne(a => a.Car)
-            .WithOne(b => b.receipts)
+            .WithOne(b => b.receipt)
             .HasForeignKey<Receipt>(c => c.IdCar);
 
             modelBuilder.Entity<Receipt>()
-            .HasOne(a => a.Owner)
+            .HasOne(a => a.User)
             .WithMany(b => b.Receipts)
-            .HasForeignKey(c => c.IdOwner);
+            .HasForeignKey(c => c.IdUser);
 
             modelBuilder.Entity<Receipt>()
             .HasOne(a => a.Vendor)
             .WithMany(b => b.Receipts)
             .HasForeignKey(c => c.IdVendor);
-            modelBuilder.Entity<Owner>().ToTable("Owner");
+            modelBuilder.Entity<User>().ToTable("User");
             modelBuilder.Entity<Vendor>().ToTable("Vendor");
             modelBuilder.Entity<Car>().ToTable("Car");
         }

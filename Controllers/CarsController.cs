@@ -1,11 +1,14 @@
 using Asp.net_core.DTO.CarDto;
 using Asp.net_core.Interfaces;
 using Asp.net_core.Models;
+using Asp.net_core.Static;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Asp.net_core.Controllers
 {
+    [Authorize(Roles = UserRoles.User)]
     [ApiController]
     [Route("api/[controller]")]
     public class CarsController : ControllerBase
@@ -25,12 +28,13 @@ namespace Asp.net_core.Controllers
         * @return all cars
         */
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(Car))]
+        [ProducesResponseType(200, Type = typeof(ResponeCarDto))]
         [ProducesResponseType(400)]
         public ActionResult GetCars()
         {
             var cars = _carRepository.GetCars();
-            return Ok(cars);
+            var responeCarDto = _mapper.Map<IList<ResponeCarDto>>(cars);
+            return Ok(responeCarDto);
         }
 
         /**
@@ -77,7 +81,7 @@ namespace Asp.net_core.Controllers
         * @param id (id to delete)
         * @return Status code
         */
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public ActionResult DeleteCar(int id)

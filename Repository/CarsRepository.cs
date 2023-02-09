@@ -18,8 +18,9 @@ namespace Asp.net_core.Repository
         public ICollection<Car> GetCars()
         {
             return _context.Cars
-            .Include(b => b.receipts).ThenInclude(n => n.Owner)
-            .Include(g => g.receipts).ThenInclude(d => d.Vendor)
+            .Include(b => b.receipt).ThenInclude(n => n.User)
+            .Include(g => g.receipt).ThenInclude(d => d.Vendor)
+            .AsNoTracking()
             .OrderBy(p => p.Name).ToList();
         }
 

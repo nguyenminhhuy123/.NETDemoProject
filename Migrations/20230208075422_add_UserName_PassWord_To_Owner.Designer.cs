@@ -3,6 +3,7 @@ using Asp.net_core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Asp.netcore.Migrations
 {
     [DbContext(typeof(TestDbcontext))]
-    partial class TestDbcontextModelSnapshot : ModelSnapshot
+    [Migration("20230208075422_add_UserName_PassWord_To_Owner")]
+    partial class addUserNamePassWordToOwner
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,36 +44,7 @@ namespace Asp.netcore.Migrations
                     b.ToTable("Car", (string)null);
                 });
 
-            modelBuilder.Entity("Asp.net_core.Models.Receipt", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("IdCar")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdUser")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdVendor")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdCar")
-                        .IsUnique();
-
-                    b.HasIndex("IdUser");
-
-                    b.HasIndex("IdVendor");
-
-                    b.ToTable("Receipts");
-                });
-
-            modelBuilder.Entity("Asp.net_core.Models.User", b =>
+            modelBuilder.Entity("Asp.net_core.Models.Owner", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -85,17 +59,42 @@ namespace Asp.netcore.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Role")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
                     b.Property<string>("UserName")
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("User", (string)null);
+                    b.ToTable("Owner", (string)null);
+                });
+
+            modelBuilder.Entity("Asp.net_core.Models.Receipt", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("IdCar")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdOwner")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdVendor")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdCar")
+                        .IsUnique();
+
+                    b.HasIndex("IdOwner");
+
+                    b.HasIndex("IdVendor");
+
+                    b.ToTable("Receipts");
                 });
 
             modelBuilder.Entity("Asp.net_core.Models.Vendor", b =>
@@ -126,9 +125,9 @@ namespace Asp.netcore.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Asp.net_core.Models.User", "User")
+                    b.HasOne("Asp.net_core.Models.Owner", "Owner")
                         .WithMany("Receipts")
-                        .HasForeignKey("IdUser")
+                        .HasForeignKey("IdOwner")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -140,7 +139,7 @@ namespace Asp.netcore.Migrations
 
                     b.Navigation("Car");
 
-                    b.Navigation("User");
+                    b.Navigation("Owner");
 
                     b.Navigation("Vendor");
                 });
@@ -150,7 +149,7 @@ namespace Asp.netcore.Migrations
                     b.Navigation("receipt");
                 });
 
-            modelBuilder.Entity("Asp.net_core.Models.User", b =>
+            modelBuilder.Entity("Asp.net_core.Models.Owner", b =>
                 {
                     b.Navigation("Receipts");
                 });

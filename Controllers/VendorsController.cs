@@ -1,11 +1,14 @@
 using Asp.net_core.DTO.VendorDto;
 using Asp.net_core.Interfaces;
 using Asp.net_core.Models;
+using Asp.net_core.Static;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Asp.net_core.Controllers
 {
+    [Authorize(Roles = UserRoles.User)]
     [ApiController]
     [Route("api/[controller]")]
     public class VendorsController : ControllerBase
@@ -26,12 +29,13 @@ namespace Asp.net_core.Controllers
         * @return All vendor
         */
         [HttpGet]
-        [ProducesResponseType(200, Type = typeof(Vendor))]
+        [ProducesResponseType(200, Type = typeof(ResponeVendorDto))]
         [ProducesResponseType(400)]
         public async Task<ActionResult> GetVendor()
         {
             var vendors = await _vendorRepository.GetVendors();
-            return Ok(vendors);
+            var responeVendorDto = _mapper.Map<IList<ResponeVendorDto>>(vendors);
+            return Ok(responeVendorDto);
         }
 
         /**

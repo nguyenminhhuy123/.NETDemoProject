@@ -29,7 +29,7 @@ namespace Asp.net_core.Repository
         public async Task<ICollection<Receipt>> GetReceipts()
         {
             return await _context.Receipts.Include(p => p.Car)
-            .Include(b => b.Owner)
+            .Include(b => b.User)
             .Include(n => n.Vendor)
             .ToListAsync();
         }

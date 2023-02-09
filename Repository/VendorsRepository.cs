@@ -29,7 +29,7 @@ namespace Asp.net_core.Repository
         {
             return await _context.Vendors
             .Include(p => p.Receipts).ThenInclude(i => i.Car)
-            .Include(o => o.Receipts).ThenInclude(y => y.Owner)
+            .Include(o => o.Receipts).ThenInclude(y => y.User)
             .ToListAsync();   
         }
 

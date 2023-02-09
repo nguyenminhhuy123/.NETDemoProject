@@ -4,7 +4,7 @@ namespace Asp.net_core.DTO.ReceiptsDto
     {
         public int IdVendor {get; set;}
 
-        public int IdOwner {get; set;}
+        public int IdUser {get; set;}
 
         public int IdCar {get; set;}
     }
