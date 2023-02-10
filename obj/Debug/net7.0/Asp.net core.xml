@@ -1,0 +1,245 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Asp.net core</name>
+    </assembly>
+    <members>
+        <member name="M:Asp.net_core.Controllers.AuthenticateController.Login(Asp.net_core.DTO.UserDto.TokenUserDto)">
+            <summary>
+            Login api.
+            </summary>
+            <param name="model"> Username and password to login</param>
+            <returns>A token</returns>
+        </member>
+        <member name="M:Asp.net_core.Controllers.CarsController.GetCars">
+            <summary>
+            Get all cars.
+            </summary>
+            <returns>List of car</returns>
+        </member>
+        <member name="M:Asp.net_core.Controllers.CarsController.GetCarByVendor(System.Int32)">
+            <summary>
+            Get cars sell by vendor.
+            </summary>
+            <returns>List of car</returns>
+        </member>
+        <member name="M:Asp.net_core.Controllers.CarsController.PostCar(Asp.net_core.DTO.CarDto.PostCarDto)">
+            <summary>
+            Add a car.
+            </summary>
+            <param name="postCarDto"> car information </param>
+            <returns></returns>
+        </member>
+        <member name="M:Asp.net_core.Controllers.CarsController.PutCar(Asp.net_core.DTO.CarDto.UpdateCarDto)">
+            <summary>
+            Update a car by id.
+            </summary>
+            <param name="updateCarDto"> UpdateCarDto(car information to update) </param>
+            <returns></returns>
+        </member>
+        <member name="M:Asp.net_core.Controllers.CarsController.DeleteCar(System.Int32)">
+            <summary>
+            Delete a car by id.
+            </summary>
+            <param name="id"> Id to delete </param>
+            <returns></returns>
+        </member>
+        <member name="M:Asp.net_core.Controllers.CarsController.PatchCar(System.Int32,Microsoft.AspNetCore.JsonPatch.JsonPatchDocument{Asp.net_core.Models.Car})">
+            <summary>
+            Update a car using json patch.
+            </summary>
+            <param name="patchDoc"> json patch document </param>
+            <param name="id"> Id to update </param>
+            <returns></returns>
+        </member>
+        <member name="M:Asp.net_core.Controllers.ReceiptController.GetReceipt">
+            <summary>
+            Get all receipts.
+            </summary>
+            <returns>List of receipt</returns>
+        </member>
+        <member name="M:Asp.net_core.Controllers.ReceiptController.PostReceipt(Asp.net_core.DTO.ReceiptsDto.PostReceiptDto)">
+            <summary>
+            Add a receipt.
+            </summary>
+            <param name="postReceiptDto"> Full information of Receipt </param>
+            <returns></returns>
+        </member>
+        <member name="M:Asp.net_core.Controllers.ReceiptController.PutReceipt(Asp.net_core.DTO.ReceiptsDto.UpdateReceiptDto)">
+            <summary>
+            Update a receipt by id.
+            </summary>
+            <param name="updateReceiptDto"> Receipt information to update </param>
+            <returns></returns>
+        </member>
+        <member name="M:Asp.net_core.Controllers.ReceiptController.DeleteReceipt(System.Int32)">
+            <summary>
+            Delete a receipt by id.
+            </summary>
+            <param name="id"> Id to delete </param>
+            <returns></returns>
+        </member>
+        <member name="M:Asp.net_core.Controllers.UsersController.GetUsers">
+            <summary>
+            Get all Users.
+            </summary>
+            <returns>List of user</returns>
+        </member>
+        <member name="M:Asp.net_core.Controllers.UsersController.PostUser(Asp.net_core.DTO.UserDto.RegisterUserDto)">
+            <summary>
+            Add a user.
+            </summary>
+            <param name="registerUserDto"> Information of user </param>
+            <returns></returns>
+        </member>
+        <member name="M:Asp.net_core.Controllers.UsersController.PutUser(Asp.net_core.DTO.UserDto.UserDTO)">
+            <summary>
+            Add a user.
+            </summary>
+            <param name="userDto"> Information of user </param>
+            <returns></returns>
+        </member>
+        <member name="M:Asp.net_core.Controllers.UsersController.DeleteUser(System.Int32)">
+            <summary>
+            Delete a user.
+            </summary>
+            <param name="id"> User id to delete  </param>
+            <returns></returns>
+        </member>
+        <member name="M:Asp.net_core.Controllers.VendorsController.GetVendor">
+            <summary>
+            Get all vendor.
+            </summary>
+            <returns>List of vendor</returns>
+        </member>
+        <member name="M:Asp.net_core.Controllers.VendorsController.PostVendor(Asp.net_core.DTO.VendorDto.PostVendorDto)">
+            <summary>
+            Add a vendor.
+            </summary>
+            <param name="postVendorDto"> Information of vendor </param>
+            <returns></returns>
+        </member>
+        <member name="M:Asp.net_core.Controllers.VendorsController.PutVendor(Asp.net_core.DTO.VendorDto.UpdateVendorDto)">
+            <summary>
+            Add a vendor.
+            </summary>
+            <param name="updateVendorDto"> Information of vendor </param>
+            <returns></returns>
+        </member>
+        <member name="M:Asp.net_core.Controllers.VendorsController.DeleteVendor(System.Int32)">
+            <summary>
+            Delete a vendor.
+            </summary>
+            <param name="id"> Vendor id to delete  </param>
+            <returns></returns>
+        </member>
+        <member name="T:Asp.netcore.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Asp.netcore.Migrations.addRelationship">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.addRelationship.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.addRelationship.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.addRelationship.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Asp.netcore.Migrations.AddMoreentities">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.AddMoreentities.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.AddMoreentities.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.AddMoreentities.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Asp.netcore.Migrations.FixForeignKey">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.FixForeignKey.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.FixForeignKey.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.FixForeignKey.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Asp.netcore.Migrations.FixForeignKey1">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.FixForeignKey1.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.FixForeignKey1.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.FixForeignKey1.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Asp.netcore.Migrations.ChangeIntToString">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.ChangeIntToString.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.ChangeIntToString.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.ChangeIntToString.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Asp.netcore.Migrations.addIdTreceiptentity">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.addIdTreceiptentity.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.addIdTreceiptentity.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.addIdTreceiptentity.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Asp.netcore.Migrations.addUserNamePassWordToOwner">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.addUserNamePassWordToOwner.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.addUserNamePassWordToOwner.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.addUserNamePassWordToOwner.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:Asp.netcore.Migrations.convertOwnertoUser">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.convertOwnertoUser.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.convertOwnertoUser.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:Asp.netcore.Migrations.convertOwnertoUser.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

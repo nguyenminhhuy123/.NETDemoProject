@@ -1,14 +1,11 @@
 using Asp.net_core.DTO.ReceiptsDto;
 using Asp.net_core.Interfaces;
 using Asp.net_core.Models;
-using Asp.net_core.Static;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Asp.net_core.Controllers
 {
-    [Authorize(Roles = UserRoles.AdminAndUser)]
     [ApiController]
     [Route("api/[controller]")]
     public class ReceiptController : ControllerBase
@@ -34,11 +31,10 @@ namespace Asp.net_core.Controllers
             _mapper = mapper;
         }
 
-        /**
-        * Get all ceceipt
-        *
-        * @return All onwers
-        */
+        /// <summary>
+        /// Get all receipts.
+        /// </summary>
+        /// <returns>List of receipt</returns>
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(Receipt))]
         [ProducesResponseType(400)]
@@ -49,12 +45,11 @@ namespace Asp.net_core.Controllers
             return Ok(responeReceiptDto);
         }
 
-        /**
-        * Add a receipt
-        *
-        * @param postReceiptDto (include car id, User id, vendor id)
-        * @return Status code
-        */
+        /// <summary>
+        /// Add a receipt.
+        /// </summary>
+        /// <param name="postReceiptDto"> Full information of Receipt </param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
@@ -86,12 +81,11 @@ namespace Asp.net_core.Controllers
             return Ok();
         }
 
-        /**
-        * Update a ceceipt by id.
-        *
-        * @param updateReceiptDto (receipt information to update)
-        * @return Status code
-        */
+        /// <summary>
+        /// Update a receipt by id.
+        /// </summary>
+        /// <param name="updateReceiptDto"> Receipt information to update </param>
+        /// <returns></returns>
         [HttpPut]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -117,13 +111,12 @@ namespace Asp.net_core.Controllers
             return Ok();
         }
 
-        /**
-        * Delete a receipt by id
-        *
-        * @param id (id to delete)
-        * @return Status code
-        */
-        [HttpDelete]
+        /// <summary>
+        /// Delete a receipt by id.
+        /// </summary>
+        /// <param name="id"> Id to delete </param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public ActionResult DeleteReceipt(int id)

@@ -55,5 +55,13 @@ namespace Asp.net_core.Repository
         {
             return _context.Cars.Where(p => p.Id == id).FirstOrDefault();
         }
+
+        public async Task<ICollection<Car>> GetCarsByVendor(int id)
+        {
+            return await _context.Cars
+            .Include(p => p.receipt)
+            .Where(c => c.receipt.IdVendor == id)
+            .ToListAsync();
+        }
     }
 }

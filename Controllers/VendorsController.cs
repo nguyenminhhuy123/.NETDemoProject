@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Asp.net_core.Controllers
 {
-    [Authorize(Roles = UserRoles.User)]
     [ApiController]
     [Route("api/[controller]")]
     public class VendorsController : ControllerBase
@@ -22,12 +21,10 @@ namespace Asp.net_core.Controllers
             _mapper = mapper;
         }
 
-        /**
-        * Get all vendor
-        *
-        * @param a First number
-        * @return All vendor
-        */
+        /// <summary>
+        /// Get all vendor.
+        /// </summary>
+        /// <returns>List of vendor</returns>
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(ResponeVendorDto))]
         [ProducesResponseType(400)]
@@ -38,12 +35,11 @@ namespace Asp.net_core.Controllers
             return Ok(responeVendorDto);
         }
 
-        /**
-        * Add a receipt
-        *
-        * @param postVendorDto (vendor information to add)
-        * @return Status code
-        */
+        /// <summary>
+        /// Add a vendor.
+        /// </summary>
+        /// <param name="postVendorDto"> Information of vendor </param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
@@ -60,12 +56,11 @@ namespace Asp.net_core.Controllers
             return Ok();
         }
 
-        /**
-        * Update vendor by id
-        *
-        * @param updateVendorDto (vendor information to update)
-        * @return Status code
-        */
+        /// <summary>
+        /// Add a vendor.
+        /// </summary>
+        /// <param name="updateVendorDto"> Information of vendor </param>
+        /// <returns></returns>
         [HttpPut]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -86,13 +81,12 @@ namespace Asp.net_core.Controllers
             return Ok();
         }
 
-        /**
-        * Delete vendor by id
-        *
-        * @param id (id to delete)
-        * @return Status code
-        */
-        [HttpDelete]
+        /// <summary>
+        /// Delete a vendor.
+        /// </summary>
+        /// <param name="id"> Vendor id to delete  </param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public ActionResult DeleteVendor(int id)

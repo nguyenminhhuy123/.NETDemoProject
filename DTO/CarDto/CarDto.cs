@@ -6,6 +6,5 @@ namespace Asp.net_core.DTO.CarDto
 
         public double Price {get; set;}
 
-        public string? User {get; set;}
     }
 }

@@ -29,8 +29,15 @@ namespace Asp.net_core.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Login api.
+        /// </summary>
+        /// <param name="model"> Username and password to login</param>
+        /// <returns>A token</returns>
         [HttpPost]
         [Route("login")]
+        [ProducesResponseType(201)]
+        [ProducesResponseType(401)]
         public async Task<IActionResult> Login([FromBody] TokenUserDto model)
         {
             var user = _usersRepository.GetUserByNameAndPassword

@@ -3,12 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using Asp.net_core.Models;
 using Asp.net_core.DTO.UserDto;
-using Microsoft.AspNetCore.Authorization;
-using Asp.net_core.Static;
 
 namespace Asp.net_core.Controllers
 {
-    [Authorize(Roles = UserRoles.Admin)]
     [ApiController]
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
@@ -22,11 +19,10 @@ namespace Asp.net_core.Controllers
             _mapper = mapper;
         }
 
-        /**
-        * Get all Users
-        *
-        * @return All onwers
-        */
+        /// <summary>
+        /// Get all Users.
+        /// </summary>
+        /// <returns>List of user</returns>
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(ResponeUserDto))]
         [ProducesResponseType(400)]
@@ -37,12 +33,11 @@ namespace Asp.net_core.Controllers
             return Ok(responeUserDto);
         }
         
-        /**
-        * Add a User
-        *
-        * @param name (name of User)
-        * @return Status code
-        */
+        /// <summary>
+        /// Add a user.
+        /// </summary>
+        /// <param name="registerUserDto"> Information of user </param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
@@ -58,12 +53,11 @@ namespace Asp.net_core.Controllers
             return Ok();
         }
 
-        /**
-        * Update a User by id.
-        *
-        * @param UserDto (User information to update)
-        * @return Status code
-        */
+        /// <summary>
+        /// Add a user.
+        /// </summary>
+        /// <param name="userDto"> Information of user </param>
+        /// <returns></returns>
         [HttpPut]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -76,13 +70,12 @@ namespace Asp.net_core.Controllers
              return Ok();
         }
 
-        /**
-        * Delete a car by id
-        *
-        * @param id (id to delete)
-        * @return Status code
-        */
-        [HttpDelete]
+        /// <summary>
+        /// Delete a user.
+        /// </summary>
+        /// <param name="id"> User id to delete  </param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public ActionResult DeleteUser(int id)

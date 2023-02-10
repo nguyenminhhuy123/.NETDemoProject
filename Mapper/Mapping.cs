@@ -21,6 +21,7 @@ namespace Asp.net_core.Mapper
             CreateMap<PostCarDto, Car>();
             CreateMap<Car, UpdateCarDto>();
             CreateMap<Car, ResponeCarDto>();
+            CreateMap<Car, CarDto>();
 
             CreateMap<PostVendorDto, Vendor>();
             CreateMap<UpdateVendorDto, Vendor>();

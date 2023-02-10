@@ -6,6 +6,8 @@ namespace Asp.net_core.Interfaces
     {
         ICollection<Car> GetCars(); 
 
+        Task<ICollection<Car>> GetCarsByVendor(int id); 
+
         Task<bool> PostCar(Car car);
 
         bool PutCar(Car car);
